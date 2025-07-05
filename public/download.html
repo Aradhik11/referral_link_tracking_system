@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download IgbIgi App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .download-container {
+            max-width: 600px;
+            width: 90%;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 25px;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .app-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .app-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .referral-info {
+            background: #f8f9ff;
+            border: 1px solid #e0e6ff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .referral-info.show {
+            display: block;
+        }
+
+        .referral-info h3 {
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .referral-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            margin-bottom: 20px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+        }
+
+        .download-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .download-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .app-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature {
+            padding: 15px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            border: 1px solid #e0e6ff;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .feature h4 {
+            color: #667eea;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .download-info {
+            background: #e8f5e8;
+            border: 1px solid #c3e6c3;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .download-info.show {
+            display: block;
+        }
+
+        .download-info h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .download-info p {
+            color: #388e3c;
+        }
+
+        .error-info {
+            background: #ffebee;
+            border: 1px solid #ffcdd2;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .error-info.show {
+            display: block;
+        }
+
+        .error-info h3 {
+            color: #d32f2f;
+            margin-bottom: 10px;
+        }
+
+        .error-info p {
+            color: #f44336;
+        }
+
+        .platform-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .platform-btn {
+            padding: 12px 25px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .platform-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .download-container {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+            
+            .app-title {
+                font-size: 2rem;
+            }
+            
+            .download-btn {
+                padding: 15px 40px;
+                font-size: 1.1rem;
+            }
+            
+            .platform-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .back-link {
+                position: relative;
+                top: auto;
+                left: auto;
+                margin-bottom: 20px;
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">
+        ← Back to Home
+    </a>
+
+    <div class="download-container">
+        <div class="app-icon">📱</div>
+        
+        <h1 class="app-title">IgbIgi</h1>
+        <p class="app-subtitle">The ultimate mobile experience awaits</p>
+        
+        <div id="referralInfo" class="referral-info">
+            <h3>🎉 Special Referral Link</h3>
+            <p>You were referred by <strong id="agentName">one of our partners</strong>!</p>
+        </div>
+
+        <div class="app-features">
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h4>Lightning Fast</h4>
+                <p>Optimized performance</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔒</div>
+                <h4>Secure</h4>
+                <p>End-to-end encryption</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎨</div>
+                <h4>Beautiful UI</h4>
+                <p>Stunning design</p>
+            </div>
+        </div>
+
+        <button id="downloadBtn" class="download-btn">
+            <span class="loading-spinner"></span>
+            Download Now
+        </button>
+
+        <div class="platform-buttons">
+            <a href="#" class="platform-btn" onclick="simulateDownload('ios')">
+                🍎 iOS App Store
+            </a>
+            <a href="#" class="platform-btn" onclick="simulateDownload('android')">
+                🤖 Google Play
+            </a>
+        </div>
+
+        <div id="downloadInfo" class="download-info">
+            <h3>✅ Download Successful!</h3>
+            <p>Thank you for downloading IgbIgi! Your download has been tracked and credited to your referrer.</p>
+        </div>
+
+        <div id="errorInfo" class="error-info">
+            <h3>❌ Download Error</h3>
+            <p id="errorMessage">Something went wrong. Please try again.</p>
+        </div>
+    </div>
+
+    <script>
+        let referralCode = null;
+        let downloadInProgress = false;
+
+        // Extract referral code from URL
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            referralCode = urlParams.get('ref');
+
+            if (referralCode) {
+                document.getElementById('referralInfo').classList.add('show');
+                // Fetch agent info to show agent name
+                fetchAgentInfo(referralCode);
+            }
+        });
+
+        // Fetch agent information
+        async function fetchAgentInfo(code) {
+            try {
+                const response = await fetch('/api/agents');
+                const agents = await response.json();
+                const agent = agents.find(a => a.referralCode === code);
+                
+                if (agent) {
+                    document.getElementById('agentName').textContent = agent.name;
+                }
+            } catch (error) {
+                console.error('Error fetching agent info:', error);
+            }
+        }
+
+        // Main download button click handler
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            simulateDownload('main');
+        });
+
+        // Simulate download process
+        async function simulateDownload(platform = 'main') {
+            if (downloadInProgress) return;
+
+            downloadInProgress = true;
+            const downloadBtn = document.getElementById('downloadBtn');
+            const loadingSpinner = downloadBtn.querySelector('.loading-spinner');
+            const downloadInfo = document.getElementById('downloadInfo');
+            const errorInfo = document.getElementById('errorInfo');
+
+            // Hide previous messages
+            downloadInfo.classList.remove('show');
+            errorInfo.classList.remove('show');
+
+            // Show loading state
+            downloadBtn.disabled = true;
+            loadingSpinner.style.display = 'inline-block';
+            downloadBtn.innerHTML = '<span class="loading-spinner"></span>Processing Download...';
+
+            try {
+                // Simulate download delay
+                await new Promise(resolve => setTimeout(resolve, 1500));
+
+                // Track the download
+                const response = await fetch('/api/download', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        referralCode: referralCode,
+                        platform: platform
+                    })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Success
+                    downloadInfo.classList.add('show');
+                    downloadBtn.innerHTML = '✅ Downloaded Successfully!';
+                    downloadBtn.style.background = '#4caf50';
+                    
+                    // Simulate file download
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.download = 'IgbIgi-App.apk';
+                    link.click();
+
+                    // Show success message with agent info
+                    if (result.agent) {
+                        const successMsg = downloadInfo.querySelector('p');
+                        successMsg.innerHTML = `Thank you for downloading IgbIgi! Your download has been credited to <strong>${result.agent}</strong>. Total downloads: <strong>${result.totalDownloads}</strong>`;
+                    }
+                } else {
+                    // Error
+                    throw new Error(result.error || 'Download failed');
+                }
+            } catch (error) {
+                console.error('Download error:', error);
+                errorInfo.classList.add('show');
+                document.getElementById('errorMessage').textContent = error.message;
+                
+                // Reset button
+                downloadBtn.disabled = false;
+                downloadBtn.innerHTML = 'Try Again';
+                downloadBtn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            } finally {
+                downloadInProgress = false;
+                loadingSpinner.style.display = 'none';
+            }
+        }
+
+        // Add some visual feedback for platform buttons
+        document.querySelectorAll('.platform-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const platform = this.textContent.includes('iOS') ? 'ios' : 'android';
+                simulateDownload(platform);
+            });
+        });
+
+        // Add click tracking for analytics
+        document.addEventListener('click', function(e) {
+            // Track all clicks for analytics
+            if (referralCode) {
+                fetch('/api/analytics/click', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        referralCode: referralCode,
+                        element: e.target.tagName,
+                        timestamp: new Date().toISOString()
+                    })
+                }).catch(err => console.log('Analytics tracking failed:', err));
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+[
+  {
+    "agentCode": "agent123",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0",
+    "fingerprint": "dfeccc2d1b50e70467e871d35fa306ff",
+    "timestamp": "2025-07-04T19:47:28.667Z",
+    "downloaded": true,
+    "downloadedAt": "2025-07-04T19:47:28.667Z"
+  },
+  {
+    "agentCode": "agent748cf823",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0",
+    "fingerprint": "f1b905ecd0e6eef889e86046e587b225",
+    "timestamp": "2025-07-04T19:49:13.256Z",
+    "downloaded": true,
+    "downloadedAt": "2025-07-04T19:49:13.256Z"
+  },
+  {
+    "agentCode": "agent748cf823",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0",
+    "fingerprint": "f1b905ecd0e6eef889e86046e587b225",
+    "timestamp": "2025-07-05T03:15:48.083Z",
+    "downloaded": false,
+    "visitType": "page_visit"
+  }
+]

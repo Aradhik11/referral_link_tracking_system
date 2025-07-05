@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IgbIgi - Referral Tracking System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .cta-section {
+            text-align: center;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .agent-section {
+            margin-top: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .agents-list {
+            margin-top: 30px;
+        }
+
+        .agent-card {
+            background: #f8f9ff;
+            border: 1px solid #e0e6ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .agent-info h4 {
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .agent-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .agent-stats {
+            text-align: right;
+        }
+
+        .download-count {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .referral-link {
+            font-size: 0.8rem;
+            color: #888;
+            word-break: break-all;
+            max-width: 300px;
+        }
+
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+
+        .copy-btn:hover {
+            background: #5a6fd8;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: #4caf50;
+        }
+
+        .notification.error {
+            background: #f44336;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .agent-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .agent-stats {
+                text-align: center;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 IgbIgi</h1>
+            <p>Referral Link Tracking System</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature">
+                <div class="feature-icon">🔗</div>
+                <h3>Unique Referral Links</h3>
+                <p>Generate unique referral links for each agent to track their performance accurately.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <h3>Real-time Analytics</h3>
+                <p>Monitor download counts and conversion rates with detailed analytics dashboard.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🛡️</div>
+                <h3>Duplicate Prevention</h3>
+                <p>Advanced fingerprinting prevents duplicate downloads from the same user.</p>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Get Started</h2>
+            <p>Access the dashboard to view analytics or create new agent accounts.</p>
+            <a href="/dashboard" class="btn btn-primary">View Dashboard</a>
+            <a href="/download" class="btn btn-secondary">Download Page</a>
+        </div>
+
+        <div class="card agent-section">
+            <h2>Create New Agent</h2>
+            <form id="agentForm">
+                <div class="form-group">
+                    <label for="name">Agent Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Agent</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Current Agents</h2>
+            <div id="agentsList" class="agents-list">
+                <p>Loading agents...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // Load agents on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAgents();
+        });
+
+        // Handle agent form submission
+        document.getElementById('agentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email')
+            };
+
+            try {
+                const response = await fetch('/api/agents', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showNotification('Agent created successfully!', 'success');
+                    e.target.reset();
+                    loadAgents();
+                } else {
+                    showNotification(result.error || 'Error creating agent', 'error');
+                }
+            } catch (error) {
+                showNotification('Network error. Please try again.', 'error');
+            }
+        });
+
+        // Load and display agents
+        async function loadAgents() {
+            try {
+                const response = await fetch('/api/agents');
+                const agents = await response.json();
+
+                const agentsListDiv = document.getElementById('agentsList');
+                
+                if (agents.length === 0) {
+                    agentsListDiv.innerHTML = '<p>No agents found. Create your first agent above!</p>';
+                    return;
+                }
+
+                const agentsHTML = agents.map(agent => `
+                    <div class="agent-card">
+                        <div class="agent-info">
+                            <h4>${agent.name}</h4>
+                            <p>${agent.email}</p>
+                            <div class="referral-link">
+                                ${agent.referralLink}
+                                <button class="copy-btn" onclick="copyToClipboard('${agent.referralLink}')">Copy</button>
+                            </div>
+                        </div>
+                        <div class="agent-stats">
+                            <div class="download-count">${agent.downloadCount}</div>
+                            <p>Downloads</p>
+                        </div>
+                    </div>
+                `).join('');
+
+                agentsListDiv.innerHTML = agentsHTML;
+            } catch (error) {
+                document.getElementById('agentsList').innerHTML = '<p>Error loading agents. Please refresh the page.</p>';
+            }
+        }
+
+        // Copy to clipboard function
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                showNotification('Referral link copied to clipboard!', 'success');
+            }, function() {
+                showNotification('Failed to copy link', 'error');
+            });
+        }
+
+        // Show notification
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

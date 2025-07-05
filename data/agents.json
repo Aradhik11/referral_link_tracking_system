@@ -1,0 +1,26 @@
+{
+  "agent123": {
+    "id": "agent123",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "referralCode": "agent123",
+    "downloadCount": 1,
+    "createdAt": "2025-07-04T18:46:51.642Z"
+  },
+  "agent456": {
+    "id": "agent456",
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "referralCode": "agent456",
+    "downloadCount": 0,
+    "createdAt": "2025-07-04T18:46:51.643Z"
+  },
+  "agent748cf823": {
+    "id": "agent748cf823",
+    "name": "Aradhik Camboy",
+    "email": "aradhik09@gmail.com",
+    "referralCode": "agent748cf823",
+    "downloadCount": 1,
+    "createdAt": "2025-07-04T19:48:46.798Z"
+  }
+}
