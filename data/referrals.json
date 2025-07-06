@@ -4,26 +4,29 @@
     "ip": "::1",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0",
     "fingerprint": "dfeccc2d1b50e70467e871d35fa306ff",
-    "timestamp": "2025-07-04T19:47:28.667Z",
+    "timestamp": "2025-07-06T13:47:02.064Z",
     "downloaded": true,
-    "downloadedAt": "2025-07-04T19:47:28.667Z"
+    "visitType": "page_visit",
+    "downloadedAt": "2025-07-06T13:47:20.680Z"
   },
   {
-    "agentCode": "agent748cf823",
+    "agentCode": "agent456",
     "ip": "::1",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0",
-    "fingerprint": "f1b905ecd0e6eef889e86046e587b225",
-    "timestamp": "2025-07-04T19:49:13.256Z",
+    "fingerprint": "dbe906806844c05e398fc2ab9d349bcb",
+    "timestamp": "2025-07-06T13:48:58.434Z",
     "downloaded": true,
-    "downloadedAt": "2025-07-04T19:49:13.256Z"
+    "visitType": "page_visit",
+    "downloadedAt": "2025-07-06T13:49:11.231Z"
   },
   {
-    "agentCode": "agent748cf823",
+    "agentCode": "agent4603d5ad",
     "ip": "::1",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0",
-    "fingerprint": "f1b905ecd0e6eef889e86046e587b225",
-    "timestamp": "2025-07-05T03:15:48.083Z",
-    "downloaded": false,
-    "visitType": "page_visit"
+    "fingerprint": "898a7db113e22a61d0f38b46b63f504b",
+    "timestamp": "2025-07-06T13:50:51.322Z",
+    "downloaded": true,
+    "visitType": "page_visit",
+    "downloadedAt": "2025-07-06T13:50:57.296Z"
   }
 ]

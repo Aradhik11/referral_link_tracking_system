@@ -25,6 +25,7 @@ async function getDetailedAnalytics(req, res) {
       const agentReferrals = referrals.filter(ref => ref.agentCode === agent.referralCode);
       const downloads = agentReferrals.filter(ref => ref.downloaded);
       const visits = agentReferrals.length;
+      console.log(`This is the number visits ${visits}`)
       
       return {
         agentCode: agent.referralCode,

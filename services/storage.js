@@ -115,6 +115,18 @@ async function addReferral(referralData) {
   return referralData;
 }
 
+async function updateReferral(referralId, updateData) {
+  const referrals = await getAllReferrals();
+  const index = referrals.findIndex(ref => ref.id === referralId);
+  
+  if (index !== -1) {
+    referrals[index] = { ...referrals[index], ...updateData };
+    await saveReferrals(referrals);
+    return referrals[index];
+  }
+  return null;
+}
+
 async function findDuplicateDownload(fingerprint, hours = 24) {
   const referrals = await getAllReferrals();
   const cutoffTime = new Date(Date.now() - (hours * 60 * 60 * 1000));
@@ -134,5 +146,7 @@ module.exports = {
   updateAgentDownloadCount,
   getAllReferrals,
   addReferral,
+  saveReferrals,
+  updateReferral,
   findDuplicateDownload
 };

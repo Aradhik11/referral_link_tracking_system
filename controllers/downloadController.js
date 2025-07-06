@@ -1,5 +1,5 @@
 const crypto = require('crypto');
-const { getAgentByCode, updateAgentDownloadCount, addReferral, findDuplicateDownload } = require('../services/storage');
+const { getAgentByCode, updateAgentDownloadCount, getAllReferrals, addReferral, findDuplicateDownload } = require('../services/storage');
 
 function createFingerprint(ip, userAgent, referralCode) {
   return crypto.createHash('md5').update(ip + userAgent + referralCode).digest('hex');
@@ -38,22 +38,43 @@ async function trackDownload(req, res) {
       });
     }
     
-    // Create referral record
-    const referralRecord = {
-      agentCode: referralCode,
-      ip: ip,
-      userAgent: userAgent,
-      fingerprint: fingerprint,
-      timestamp: new Date().toISOString(),
-      downloaded: true,
-      downloadedAt: new Date().toISOString()
-    };
+    const referrals = await getAllReferrals();
     
-    // Save referral and update agent count
-    await addReferral(referralRecord);
+    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+    let existingVisit = referrals.find(ref => 
+      ref.fingerprint === fingerprint && 
+      ref.agentCode === referralCode &&
+      new Date(ref.timestamp) > oneHourAgo &&
+      !ref.downloaded
+    );
+    
+    if (existingVisit) {
+      existingVisit.downloaded = true;
+      existingVisit.downloadedAt = new Date().toISOString();
+      
+      const fs = require('fs').promises;
+      const path = require('path');
+      const REFERRALS_FILE = path.join('./data', 'referrals.json');
+      await fs.writeFile(REFERRALS_FILE, JSON.stringify(referrals, null, 2));
+      
+      console.log(`Updated existing visit record to download for agent: ${referralCode}`);
+    } else {
+      const downloadRecord = {
+        agentCode: referralCode,
+        ip: ip,
+        userAgent: userAgent,
+        fingerprint: fingerprint,
+        timestamp: new Date().toISOString(),
+        downloaded: true,
+        downloadedAt: new Date().toISOString(),
+        visitType: 'direct_download'
+      };
+      
+      await addReferral(downloadRecord);
+      console.log(`Created new download record for agent: ${referralCode}`);
+    }
     const updatedAgent = await updateAgentDownloadCount(referralCode);
     
-    console.log(`Download tracked for agent: ${referralCode}`);
     
     res.json({
       success: true,
